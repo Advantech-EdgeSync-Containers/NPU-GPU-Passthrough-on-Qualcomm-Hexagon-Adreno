@@ -1,0 +1,36 @@
+version: "3.8"
+services:
+  qualcomm-hexagon-npu-gpu:
+    container_name: NPU-GPU-Passthrough-on-Qualcomm-Hexagon-Adreno
+    image: harbor.edgesync.cloud/nagarro-container-images/npu-gpu-passthrough-on-qualcomm-hexagon-adreno:v1
+    privileged: true
+    volumes:
+      - ./wise-bench.sh:/workspace/wise-bench.sh      
+      - /etc/xdg/weston:/etc/xdg/weston
+      - /usr/share/X11:/usr/share/X11
+      - /dev:/dev
+      - /dev/socket/weston:/dev/socket/weston
+      - /usr/bin/snpe-throughput-net-run:/usr/bin/snpe-throughput-net-run
+      - /usr/bin/snpe-platform-validator:/usr/bin/snpe-platform-validator
+      - /usr/bin/snpe-parallel-run:/usr/bin/snpe-parallel-run
+      - /usr/bin/snpe-net-run:/usr/bin/snpe-net-run
+      - /usr/bin/snpe-diagview:/usr/bin/snpe-diagview
+      - /usr/bin/qnn-net-run:/usr/bin/qnn-net-run
+      - /usr/bin/qnn-platform-validator:/usr/bin/qnn-platform-validator
+    working_dir: /workspace
+    devices:
+      - /dev/fastrpc-cdsp-secure
+      - /dev/fastrpc-adsp-secure
+      - /dev/kgsl-3d0:/dev/kgsl-3d0
+      - /dev/dma_heap/system:/dev/dma_heap/system
+      - /dev/dma_heap/qcom,system:/dev/dma_heap/qcom,system
+      - /dev/dri/card0:/dev/dri/card0
+      - /dev/dri/renderD128:/dev/dri/renderD128
+      - /dev/fastrpc-cdsp:/dev/fastrpc-cdsp
+      - /dev/video32:/dev/video32
+      - /dev/video33:/dev/video33
+    entrypoint: ["/bin/bash"]
+    network_mode: host
+    stdin_open: true
+    tty: true
+    restart: always
