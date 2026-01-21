@@ -2,7 +2,7 @@ version: "3.8"
 services:
   qualcomm-hexagon-npu-gpu:
     container_name: NPU-GPU-Passthrough-on-Qualcomm-Hexagon-Adreno
-    image: harbor.edgesync.cloud/nagarro-container-images/npu-gpu-passthrough-on-qualcomm-hexagon-adreno:v1
+    image: edgesync.azurecr.io/advantech/npu-gpu-passthrough-on-qualcomm-hexagon-adreno:1.3.0-Ubuntu22.04-ARM
     privileged: true
     volumes:
       - ./wise-bench.sh:/workspace/wise-bench.sh      
